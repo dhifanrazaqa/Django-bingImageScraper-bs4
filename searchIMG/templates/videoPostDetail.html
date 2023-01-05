@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block content %}
+    <body>
+    <div style="padding-top: 3%; padding-bottom:3%;">
+    <h5><a class="btn btn-light" href="{% url 'Home' %}">Home</a> / <input type="button" value="{{ postDetails.imageKeyword }}" class="btn btn-light" onclick="history.back()"></input></h5>
+    </div>
+    <h3>{{ postDetails.imageTitle }}</h3>
+    <div style="padding: 5%;">
+        <img src="{{ postDetails.imageURLHD }}" class="img-fluid center-block d-block mx-auto" onerror="this.onerror=null; this.src='{{ postDetails.imageURL }}'">
+    </div>
+    <p>{{ postDetails.imageDescription }}</p>
+    <br>
+    <H3 style="padding-top: 5%;">Related Post</H3>
+    <section class="wrapper">
+        <div class="container-fostrap">
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        {% for post in postRandom|slice:":3" %}
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="card">
+                                <a class="img-card" href="{% url 'detailPost' post.slug %}">
+                                <img src="{{ post.url }}" />
+                            </a>
+                                <div class="card-content">
+                                    <h4 class="card-title">
+                                        <a href="{% url 'detailPost' post.slug %}">{{ post.keyword }}
+                                    </a>
+                                </div>
+                                <div class="card-read-more">
+                                    <a href="{% url 'detailPost' post.slug %}" class="btn btn-light">
+                                        Read More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+    {% endblock %}
+</html>

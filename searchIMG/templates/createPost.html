@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'base.html' %}
+    {% load static %}
+<body>
+    {% block content %}
+    <div style="padding: 5%;">
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Keyword</span>
+            <textarea type="text" class="form-control" rows="3" name="keyword" placeholder="..." aria-label="Username" aria-describedby="basic-addon1"></textarea>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Jumlah Halaman Scrape</span>
+            <input type="number" class="form-control" name="jumlah" placeholder="..." aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <input class="btn btn-light" type="submit" value="Submit">
+    </form>
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% endblock %}
+</body>
+</html>
